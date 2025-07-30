@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Items {
+  item_code  Int    @id @default(autoincrement())
+  item_name  String @unique
+  item_stat  Int
+  item_price Int
+
+  inventory Inventory[]
+  equipment Equipment[]
+
+  @@map("Items")
+}
+
+model Accounts {
+  userNo   Int    @id @unique @default(autoincrement()) @map("userNo")
+  userId   String @unique @map("userId")
+  password String @map("password")
+  // confirm_password String @map("confirm_password")
+  name     String @map("name")
+
+  characters Characters[] // 각 계정은 여러 캐릭터를 가질 수 있음
+
+  @@map("Accounts")
+}
+
+model Characters {
+  userNo         Int    @map("userNo")
+  charcterId     Int    @id @unique @default(autoincrement()) @map("characterId")
+  character_name String @unique @map("character_name")
+  health         Int    @map("health")
+  power          Int    @map("power")
+  money          Int    @default(10000) @map("money") // 기본 돈 10000원
+
+  accounts  Accounts    @relation(fields: [userNo], references: [userNo], onDelete: Cascade)
+  equipment Equipment[]
+  inventory Inventory[]
+
+  @@map("Characters")
+}
+
+model Equipment {
+  item_code      Int    @id @map("item_code")
+  item_name      String @unique @map("item_name")
+  item_stat      Int    @map("item_stat")
+  character_name String @unique @map("character_name")
+
+  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
+  characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
+
+  @@map("Equipment")
+}
+
+model Inventory {
+  item_code      Int    @id @map("item_code")
+  item_name      String @unique @map("item_name")
+  item_stat      Int    @map("item_stat")
+  item_count     Int    @map("item_count")
+  character_name String @unique @map("character_name")
+
+  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
+  characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
+
+  @@map("Inventory")
+}
