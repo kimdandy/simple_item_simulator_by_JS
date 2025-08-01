@@ -137,7 +137,7 @@ exports.Prisma.CharactersScalarFieldEnum = {
 };
 
 exports.Prisma.ItemsScalarFieldEnum = {
-  item_Id: 'item_Id',
+  item_code: 'item_code',
   item_name: 'item_name',
   item_price: 'item_price',
   item_stat: 'item_stat'
@@ -151,13 +151,13 @@ exports.Prisma.ProductsScalarFieldEnum = {
 };
 
 exports.Prisma.EquipmentScalarFieldEnum = {
-  item_Id: 'item_Id',
+  item_code: 'item_code',
   item_name: 'item_name',
   character_name: 'character_name'
 };
 
 exports.Prisma.InventoryScalarFieldEnum = {
-  item_Id: 'item_Id',
+  item_code: 'item_code',
   item_name: 'item_name',
   item_count: 'item_count',
   character_name: 'character_name'

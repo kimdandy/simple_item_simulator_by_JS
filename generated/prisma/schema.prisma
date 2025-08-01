@@ -34,7 +34,7 @@ model Characters {
 }
 
 model Items {
-  item_Id    Int    @id @unique @default(autoincrement()) @map("item_Id")
+  item_code  Int    @id @unique @default(autoincrement()) @map("item_Id")
   item_name  String @unique
   item_price Int
   item_stat  Json   @map("item_stat")
@@ -55,24 +55,24 @@ model Products {
 }
 
 model Equipment {
-  item_Id        Int    @id @unique @default(autoincrement())
+  item_code      Int    @id @unique @default(autoincrement())
   item_name      String @unique
   character_name String @unique @map("character_name")
 
   characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
-  items      Items      @relation(fields: [item_Id], references: [item_Id], onDelete: Cascade)
+  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
 
   @@map("Equipment")
 }
 
 model Inventory {
-  item_Id        Int    @id @unique @default(autoincrement()) @map("item_Id")
+  item_code      Int    @id @unique @default(autoincrement()) @map("item_Id")
   item_name      String @unique
   item_count     Int    @map("item_count")
   character_name String @unique @map("character_name")
 
   characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
-  items      Items      @relation(fields: [item_Id], references: [item_Id], onDelete: Cascade)
+  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
 
   @@map("Inventory")
 }
