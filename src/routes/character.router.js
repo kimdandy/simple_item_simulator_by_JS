@@ -62,9 +62,11 @@ router.delete('/character/delete/:characteId', authMiddleware, async(req, res, n
 //////////////////////////////////////////////////////////////////////////////
 // 캐릭터 정보 조회 ; 테스트용
 router.get('/character', authMiddleware, async(req, res, next) => {
+    const { userId } = req.user;
     const characters = await prisma.characters.findMany({
         select: {
             //characterId: true,
+            userId: true,
             character_name: true,
             health: true,
             power: true,

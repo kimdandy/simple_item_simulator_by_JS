@@ -128,28 +128,36 @@ exports.Prisma.AccountsScalarFieldEnum = {
 };
 
 exports.Prisma.CharactersScalarFieldEnum = {
-  userId: 'userId',
   characterId: 'characterId',
   character_name: 'character_name',
   health: 'health',
   power: 'power',
-  money: 'money'
+  money: 'money',
+  userId: 'userId'
 };
 
 exports.Prisma.ItemsScalarFieldEnum = {
-  item_code: 'item_code',
+  item_Id: 'item_Id',
   item_name: 'item_name',
-  item_price: 'item_price'
+  item_price: 'item_price',
+  item_stat: 'item_stat'
+};
+
+exports.Prisma.ProductsScalarFieldEnum = {
+  product_Id: 'product_Id',
+  product_name: 'product_name',
+  product_stat: 'product_stat',
+  product_price: 'product_price'
 };
 
 exports.Prisma.EquipmentScalarFieldEnum = {
-  item_code: 'item_code',
+  item_Id: 'item_Id',
   item_name: 'item_name',
   character_name: 'character_name'
 };
 
 exports.Prisma.InventoryScalarFieldEnum = {
-  item_code: 'item_code',
+  item_Id: 'item_Id',
   item_name: 'item_name',
   item_count: 'item_count',
   character_name: 'character_name'
@@ -160,6 +168,10 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.AccountsOrderByRelevanceFieldEnum = {
   userId: 'userId',
   password: 'password',
@@ -167,12 +179,27 @@ exports.Prisma.AccountsOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.CharactersOrderByRelevanceFieldEnum = {
-  userId: 'userId',
-  character_name: 'character_name'
+  character_name: 'character_name',
+  userId: 'userId'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.ItemsOrderByRelevanceFieldEnum = {
   item_name: 'item_name'
+};
+
+exports.Prisma.ProductsOrderByRelevanceFieldEnum = {
+  product_name: 'product_name'
 };
 
 exports.Prisma.EquipmentOrderByRelevanceFieldEnum = {
@@ -190,6 +217,7 @@ exports.Prisma.ModelName = {
   Accounts: 'Accounts',
   Characters: 'Characters',
   Items: 'Items',
+  Products: 'Products',
   Equipment: 'Equipment',
   Inventory: 'Inventory'
 };

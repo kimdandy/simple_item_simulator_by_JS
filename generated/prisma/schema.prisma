@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -15,62 +9,70 @@ datasource db {
 }
 
 model Accounts {
-  userNo   Int    @id @unique @default(autoincrement()) @map("userNo")
-  userId   String @unique @map("userId")
-  password String @map("password")
-  name     String @map("name")
-
-  characters Characters[] // 각 계정은 여러 캐릭터를 가질 수 있음
+  userNo     Int          @id @unique @default(autoincrement()) @map("userNo")
+  userId     String       @unique @map("userId")
+  password   String       @map("password")
+  name       String       @map("name")
+  characters Characters[]
 
   @@map("Accounts")
 }
 
 model Characters {
-  userId         String @map("userId")
-  characterId    Int    @id @unique @default(autoincrement()) @map("characterId")
-  character_name String @unique @map("character_name")
-  health         Int    @map("health")
-  power          Int    @map("power")
-  money          Int    @map("money") // 기본 돈 10000원
+  characterId    Int        @id @unique @default(autoincrement()) @map("characterId")
+  character_name String     @unique @map("character_name")
+  health         Int        @map("health")
+  power          Int        @map("power")
+  money          Int        @map("money")
+  userId         String     @map("userId")
+  accounts       Accounts   @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  equipment      Equipment?
+  inventory      Inventory?
 
-  accounts  Accounts    @relation(fields: [userId], references: [userId], onDelete: Cascade)
-  equipment Equipment[]
-  inventory Inventory[]
-
+  @@index([userId], map: "Characters_userId_fkey")
   @@map("Characters")
 }
 
 model Items {
-  item_code  Int    @id @unique @default(autoincrement())
+  item_Id    Int    @id @unique @default(autoincrement()) @map("item_Id")
   item_name  String @unique
-  //item_stat  Json   @map("item_stat")
   item_price Int
+  item_stat  Json   @map("item_stat")
 
-  inventory Inventory[]
   equipment Equipment[]
+  inventory Inventory[]
 
   @@map("Items")
 }
 
+model Products {
+  product_Id    Int    @id @unique @default(autoincrement())
+  product_name  String @unique
+  product_stat  Json
+  product_price Int
+
+  @@map("Products")
+}
+
 model Equipment {
-  item_code      Int    @id @map("item_code")
-  item_name      String @unique @map("item_name")
+  item_Id        Int    @id @unique @default(autoincrement())
+  item_name      String @unique
   character_name String @unique @map("character_name")
 
-  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
   characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
+  items      Items      @relation(fields: [item_Id], references: [item_Id], onDelete: Cascade)
 
   @@map("Equipment")
 }
 
 model Inventory {
-  item_code      Int    @id @map("item_code")
-  item_name      String @unique @map("item_name")
+  item_Id        Int    @id @unique @default(autoincrement()) @map("item_Id")
+  item_name      String @unique
   item_count     Int    @map("item_count")
   character_name String @unique @map("character_name")
 
-  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
   characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
+  items      Items      @relation(fields: [item_Id], references: [item_Id], onDelete: Cascade)
 
   @@map("Inventory")
 }
