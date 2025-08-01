@@ -28,8 +28,6 @@ model Characters {
 
   accounts  Accounts   @relation(fields: [userId], references: [userId], onDelete: Cascade)
   inventory Inventory?
-  //inventory_name Inventory? @relation("char_name")
-  //inventory_money Inventory? @relation("char_money")
   equipment Equipment?
 
   @@index([userId], map: "Characters_userId_fkey")
@@ -57,14 +55,11 @@ model Items {
 model Inventory {
   inven_id       Int    @id @default(autoincrement()) 
   character_name String @unique
-  //money Int
   item_code      Int    @unique
   item_name String @unique
   item_count     Int
 
   characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
-  //characters_name Characters @relation("char_name", fields: [character_name], references: [character_name], onDelete: Cascade)
-  //characters_money Characters @relation("char_money", fields: [money], references: [money], onDelete: Cascade)
   //items      Items      @relation( fields: [item_code], references: [item_code], onDelete: Cascade)
   inven_code      Items      @relation("inven_code", fields: [item_code], references: [item_code], onDelete: Cascade)
   inven_name  Items @relation("inven_name", fields: [item_name], references: [item_name], onDelete: Cascade)
