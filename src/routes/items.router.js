@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { prisma } from '../utils/prisma/index.js';
+import authMiddleware from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.post('/items/create', async (req, res) => {
         data: {
             item_code,
             item_name,
-            item_stat,
+            item_stat, 
             item_price
         }
     });
@@ -34,19 +35,19 @@ router.put('/items/:item_code', async (req, res, next) => {
     const {item_name, item_stat} = req.body;
 
     const item = await prisma.items.findUnique({
-        where: { item_code }
+        where: { item_code : Number(item_code) }
     });
     if(!item) { return res.status(404).json({message:'NO Data'});}
 
-    await prisma.items.update({
-        where: { item_Id: item_Id },
+    const revised_item = await prisma.items.update({
+        where: { item_code: Number(item_code) },
         data: {
             item_name,
             item_stat
         }    
     });
 
-    return res.status(200).json({ data: item, messate: 'Item updated successfully!' });
+    return res.status(200).json({ data: revised_item, messate: 'Item updated successfully!' });
 });
 
 /////////////////////////////////////////////////////////////////////////
@@ -68,12 +69,12 @@ router.get('/items', async (req, res, next) => {
 router.get('/items/:item_code', async (req, res, next) => {
     const { item_code } = req.params;
     const item = await prisma.items.findUnique({
-        where: { item_Id },
+        where: { item_code: Number(item_code) },
         select: {
-            item_code,
-            item_name,
-            item_stat,
-            item_price
+            item_code : true,
+            item_name: true,
+            item_stat: true,
+            item_price: true
         }
     });
 
@@ -81,6 +82,5 @@ router.get('/items/:item_code', async (req, res, next) => {
 });
 
 /////////////////////////////////////////////////////////////////////////
-
 
 export default router;

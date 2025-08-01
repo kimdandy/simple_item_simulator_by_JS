@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import AccountRouter from './routes/account.router.js';
 import CharacterRouter from './routes/character.router.js';
 import ItemRouter from './routes/items.router.js';
-import ProductRouter from './routes/product.router.js';
+//import ProductRouter from './routes/product.router.js';
 
 const app = express();
 const PORT = 3000; // 서버 포트 설정

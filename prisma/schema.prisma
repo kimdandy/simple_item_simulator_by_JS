@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../generated/prisma" // 경로 주의
 }
 
 datasource db {
@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Accounts {
-  userNo     Int          @id @unique @default(autoincrement()) @map("userNo")
+  userNo     Int          @id @unique @default(autoincrement())
   userId     String       @unique @map("userId")
   password   String       @map("password")
   name       String       @map("name")
@@ -19,54 +19,69 @@ model Accounts {
 }
 
 model Characters {
-  characterId    Int        @id @unique @default(autoincrement()) @map("characterId")
-  character_name String     @unique @map("character_name")
-  health         Int        @map("health")
-  power          Int        @map("power")
-  money          Int        @map("money")
-  userId         String     @map("userId")
-  accounts       Accounts   @relation(fields: [userId], references: [userId], onDelete: Cascade)
-  equipment      Equipment?
-  inventory      Inventory?
+  characterId    Int    @id @unique @default(autoincrement())
+  character_name String @unique @map("character_name")
+  health         Int    @map("health")
+  power          Int    @map("power")
+  money          Int    @map("money")
+  userId         String @map("userId")
+
+  accounts  Accounts   @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  inventory Inventory?
+  //inventory_name Inventory? @relation("char_name")
+  //inventory_money Inventory? @relation("char_money")
+  equipment Equipment?
 
   @@index([userId], map: "Characters_userId_fkey")
   @@map("Characters")
 }
 
 model Items {
-  item_id    Int    @id @default(autoincrement()) @map("item_id")
+  item_id    Int    @id @default(autoincrement()) 
   item_code  Int    @unique
   item_name  String @unique
   item_price Int
   item_stat  Json   @map("item_stat")
 
-  equipment Equipment[]
-  inventory Inventory[]
+  //inventory Inventory[]
+  inventory_code Inventory[] @relation("inven_code")
+  inventory_name Inventory[] @relation("inven_name")
+
+  //equipment Equipment[]
+  equipment_code Equipment[] @relation("equip_code")
+  equipment_name Equipment[] @relation("equip_name")
 
   @@map("Items")
 }
 
-model Equipment {
-  equip_id       Int    @id
-  item_code      Int    @unique @default(autoincrement())
-  item_name      String @unique
-  character_name String @unique @map("character_name")
+model Inventory {
+  inven_id       Int    @id @default(autoincrement()) 
+  character_name String @unique
+  //money Int
+  item_code      Int    @unique
+  item_name String @unique
+  item_count     Int
 
   characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
-  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
-
-  @@map("Equipment")
+  //characters_name Characters @relation("char_name", fields: [character_name], references: [character_name], onDelete: Cascade)
+  //characters_money Characters @relation("char_money", fields: [money], references: [money], onDelete: Cascade)
+  //items      Items      @relation( fields: [item_code], references: [item_code], onDelete: Cascade)
+  inven_code      Items      @relation("inven_code", fields: [item_code], references: [item_code], onDelete: Cascade)
+  inven_name  Items @relation("inven_name", fields: [item_name], references: [item_name], onDelete: Cascade)
+  
+  @@map("Inventory")
 }
 
-model Inventory {
-  inven_id       Int    @id
-  item_code      Int    @unique @default(autoincrement()) @map("item_Id")
+model Equipment {
+  equip_id       Int    @id @default(autoincrement()) 
+  character_name String @unique
+  item_code      Int    @unique
   item_name      String @unique
-  item_count     Int    @map("item_count")
-  character_name String @unique @map("character_name")
 
   characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
-  items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
+  //items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
+  equip_code    Items      @relation("equip_code", fields: [item_code], references: [item_code], onDelete: Cascade)
+  equip_name  Items @relation("equip_name", fields: [item_name], references: [item_name], onDelete: Cascade)
 
-  @@map("Inventory")
+  @@map("Equipment")
 }

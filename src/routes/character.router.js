@@ -39,12 +39,12 @@ router.post('/character/new', authMiddleware, async(req, res, next) =>{
 //////////////////////////////////////////////////////////////////////////////
 
 // 캐릭터 삭제
-router.delete('/character/delete/:characteId', authMiddleware, async(req, res, next) =>{
-    const { characterId } = req.params;
+router.delete('/character/:character_name', authMiddleware, async(req, res, next) =>{
+    const { character_name } = req.params;
     const { password } = req.body;
 
     const character = await prisma.characters.findUnique({
-        where: { characterId: characterId}
+        where: { character_name: character_name}
     });
 
    if(!character) { // 캐릭터가 존재하지 않을 경우
@@ -79,20 +79,31 @@ router.get('/character', authMiddleware, async(req, res, next) => {
 
 //////////////////////////////////////////////////////////////////////////////
 // 캐릭터 세부 정보 조회
-router.get('/character/:characterId', authMiddleware, async(req, res, next) => {
-    if(1){
-        const character = await prisma.characters.findUnique({
-            where: { characterId: req.params.characterId },
-            select: {
-                characterId: true,
-                character_name: true,
-                health: true,
-                power: true,
-                money: true
-            }
-        });
+router.get('/character/:character_name', authMiddleware, async(req, res, next) => {
+    const { character_name } = req.params;
+
+    const isExistCharacter = await prisma.characters.findUnique({
+    where:{ character_name }
+    });
+    if(!isExistCharacter) {
+        return res.status(404).json({ message: 'Character Not Found!' });
     }
 
-    return res.status(200).json({ data : character});
+    const character = await prisma.characters.findUnique({
+        where: { character_name: character_name },
+        select: {
+            //characterId: true,
+            character_name: true,
+            health: true,
+            power: true,
+            money: true
+        }
+    });
+
+
+    return res.status(200).json({ data : character });
 });
+
+//////////////////////////////////////////////////////////////////////////////
+
 export default router;

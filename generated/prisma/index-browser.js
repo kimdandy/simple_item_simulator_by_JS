@@ -144,19 +144,19 @@ exports.Prisma.ItemsScalarFieldEnum = {
   item_stat: 'item_stat'
 };
 
-exports.Prisma.EquipmentScalarFieldEnum = {
-  equip_id: 'equip_id',
-  item_code: 'item_code',
-  item_name: 'item_name',
-  character_name: 'character_name'
-};
-
 exports.Prisma.InventoryScalarFieldEnum = {
   inven_id: 'inven_id',
+  character_name: 'character_name',
   item_code: 'item_code',
   item_name: 'item_name',
-  item_count: 'item_count',
-  character_name: 'character_name'
+  item_count: 'item_count'
+};
+
+exports.Prisma.EquipmentScalarFieldEnum = {
+  equip_id: 'equip_id',
+  character_name: 'character_name',
+  item_code: 'item_code',
+  item_name: 'item_name'
 };
 
 exports.Prisma.SortOrder = {
@@ -194,14 +194,14 @@ exports.Prisma.ItemsOrderByRelevanceFieldEnum = {
   item_name: 'item_name'
 };
 
-exports.Prisma.EquipmentOrderByRelevanceFieldEnum = {
-  item_name: 'item_name',
-  character_name: 'character_name'
+exports.Prisma.InventoryOrderByRelevanceFieldEnum = {
+  character_name: 'character_name',
+  item_name: 'item_name'
 };
 
-exports.Prisma.InventoryOrderByRelevanceFieldEnum = {
-  item_name: 'item_name',
-  character_name: 'character_name'
+exports.Prisma.EquipmentOrderByRelevanceFieldEnum = {
+  character_name: 'character_name',
+  item_name: 'item_name'
 };
 
 
@@ -209,8 +209,8 @@ exports.Prisma.ModelName = {
   Accounts: 'Accounts',
   Characters: 'Characters',
   Items: 'Items',
-  Equipment: 'Equipment',
-  Inventory: 'Inventory'
+  Inventory: 'Inventory',
+  Equipment: 'Equipment'
 };
 
 /**
