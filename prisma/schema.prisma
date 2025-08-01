@@ -34,7 +34,8 @@ model Characters {
 }
 
 model Items {
-  item_code  Int    @id @unique @default(autoincrement()) @map("item_Id")
+  item_id    Int    @id @default(autoincrement()) @map("item_id")
+  item_code  Int    @unique
   item_name  String @unique
   item_price Int
   item_stat  Json   @map("item_stat")
@@ -45,17 +46,9 @@ model Items {
   @@map("Items")
 }
 
-model Products {
-  product_Id    Int    @id @unique @default(autoincrement())
-  product_name  String @unique
-  product_stat  Json
-  product_price Int
-
-  @@map("Products")
-}
-
 model Equipment {
-  item_code      Int    @id @unique @default(autoincrement())
+  equip_id       Int    @id
+  item_code      Int    @unique @default(autoincrement())
   item_name      String @unique
   character_name String @unique @map("character_name")
 
@@ -66,7 +59,8 @@ model Equipment {
 }
 
 model Inventory {
-  item_code      Int    @id @unique @default(autoincrement()) @map("item_Id")
+  inven_id       Int    @id
+  item_code      Int    @unique @default(autoincrement()) @map("item_Id")
   item_name      String @unique
   item_count     Int    @map("item_count")
   character_name String @unique @map("character_name")

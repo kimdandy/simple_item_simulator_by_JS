@@ -29,11 +29,6 @@ export type Characters = $Result.DefaultSelection<Prisma.$CharactersPayload>
  */
 export type Items = $Result.DefaultSelection<Prisma.$ItemsPayload>
 /**
- * Model Products
- * 
- */
-export type Products = $Result.DefaultSelection<Prisma.$ProductsPayload>
-/**
  * Model Equipment
  * 
  */
@@ -198,16 +193,6 @@ export class PrismaClient<
     * ```
     */
   get items(): Prisma.ItemsDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.products`: Exposes CRUD operations for the **Products** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Products
-    * const products = await prisma.products.findMany()
-    * ```
-    */
-  get products(): Prisma.ProductsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.equipment`: Exposes CRUD operations for the **Equipment** model.
@@ -671,7 +656,6 @@ export namespace Prisma {
     Accounts: 'Accounts',
     Characters: 'Characters',
     Items: 'Items',
-    Products: 'Products',
     Equipment: 'Equipment',
     Inventory: 'Inventory'
   };
@@ -692,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "accounts" | "characters" | "items" | "products" | "equipment" | "inventory"
+      modelProps: "accounts" | "characters" | "items" | "equipment" | "inventory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -891,72 +875,6 @@ export namespace Prisma {
           count: {
             args: Prisma.ItemsCountArgs<ExtArgs>
             result: $Utils.Optional<ItemsCountAggregateOutputType> | number
-          }
-        }
-      }
-      Products: {
-        payload: Prisma.$ProductsPayload<ExtArgs>
-        fields: Prisma.ProductsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ProductsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ProductsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload>
-          }
-          findFirst: {
-            args: Prisma.ProductsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ProductsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload>
-          }
-          findMany: {
-            args: Prisma.ProductsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload>[]
-          }
-          create: {
-            args: Prisma.ProductsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload>
-          }
-          createMany: {
-            args: Prisma.ProductsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.ProductsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload>
-          }
-          update: {
-            args: Prisma.ProductsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload>
-          }
-          deleteMany: {
-            args: Prisma.ProductsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ProductsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.ProductsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductsPayload>
-          }
-          aggregate: {
-            args: Prisma.ProductsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProducts>
-          }
-          groupBy: {
-            args: Prisma.ProductsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProductsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ProductsCountArgs<ExtArgs>
-            result: $Utils.Optional<ProductsCountAggregateOutputType> | number
           }
         }
       }
@@ -1179,7 +1097,6 @@ export namespace Prisma {
     accounts?: AccountsOmit
     characters?: CharactersOmit
     items?: ItemsOmit
-    products?: ProductsOmit
     equipment?: EquipmentOmit
     inventory?: InventoryOmit
   }
@@ -3369,28 +3286,33 @@ export namespace Prisma {
   }
 
   export type ItemsAvgAggregateOutputType = {
+    item_id: number | null
     item_code: number | null
     item_price: number | null
   }
 
   export type ItemsSumAggregateOutputType = {
+    item_id: number | null
     item_code: number | null
     item_price: number | null
   }
 
   export type ItemsMinAggregateOutputType = {
+    item_id: number | null
     item_code: number | null
     item_name: string | null
     item_price: number | null
   }
 
   export type ItemsMaxAggregateOutputType = {
+    item_id: number | null
     item_code: number | null
     item_name: string | null
     item_price: number | null
   }
 
   export type ItemsCountAggregateOutputType = {
+    item_id: number
     item_code: number
     item_name: number
     item_price: number
@@ -3400,28 +3322,33 @@ export namespace Prisma {
 
 
   export type ItemsAvgAggregateInputType = {
+    item_id?: true
     item_code?: true
     item_price?: true
   }
 
   export type ItemsSumAggregateInputType = {
+    item_id?: true
     item_code?: true
     item_price?: true
   }
 
   export type ItemsMinAggregateInputType = {
+    item_id?: true
     item_code?: true
     item_name?: true
     item_price?: true
   }
 
   export type ItemsMaxAggregateInputType = {
+    item_id?: true
     item_code?: true
     item_name?: true
     item_price?: true
   }
 
   export type ItemsCountAggregateInputType = {
+    item_id?: true
     item_code?: true
     item_name?: true
     item_price?: true
@@ -3516,6 +3443,7 @@ export namespace Prisma {
   }
 
   export type ItemsGroupByOutputType = {
+    item_id: number
     item_code: number
     item_name: string
     item_price: number
@@ -3542,6 +3470,7 @@ export namespace Prisma {
 
 
   export type ItemsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    item_id?: boolean
     item_code?: boolean
     item_name?: boolean
     item_price?: boolean
@@ -3554,13 +3483,14 @@ export namespace Prisma {
 
 
   export type ItemsSelectScalar = {
+    item_id?: boolean
     item_code?: boolean
     item_name?: boolean
     item_price?: boolean
     item_stat?: boolean
   }
 
-  export type ItemsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"item_code" | "item_name" | "item_price" | "item_stat", ExtArgs["result"]["items"]>
+  export type ItemsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"item_id" | "item_code" | "item_name" | "item_price" | "item_stat", ExtArgs["result"]["items"]>
   export type ItemsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     equipment?: boolean | Items$equipmentArgs<ExtArgs>
     inventory?: boolean | Items$inventoryArgs<ExtArgs>
@@ -3574,6 +3504,7 @@ export namespace Prisma {
       inventory: Prisma.$InventoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
+      item_id: number
       item_code: number
       item_name: string
       item_price: number
@@ -3661,8 +3592,8 @@ export namespace Prisma {
      * // Get first 10 Items
      * const items = await prisma.items.findMany({ take: 10 })
      * 
-     * // Only select the `item_code`
-     * const itemsWithItem_codeOnly = await prisma.items.findMany({ select: { item_code: true } })
+     * // Only select the `item_id`
+     * const itemsWithItem_idOnly = await prisma.items.findMany({ select: { item_id: true } })
      * 
      */
     findMany<T extends ItemsFindManyArgs>(args?: SelectSubset<T, ItemsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -3949,6 +3880,7 @@ export namespace Prisma {
    * Fields of the Items model
    */
   interface ItemsFieldRefs {
+    readonly item_id: FieldRef<"Items", 'Int'>
     readonly item_code: FieldRef<"Items", 'Int'>
     readonly item_name: FieldRef<"Items", 'String'>
     readonly item_price: FieldRef<"Items", 'Int'>
@@ -4363,911 +4295,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Products
-   */
-
-  export type AggregateProducts = {
-    _count: ProductsCountAggregateOutputType | null
-    _avg: ProductsAvgAggregateOutputType | null
-    _sum: ProductsSumAggregateOutputType | null
-    _min: ProductsMinAggregateOutputType | null
-    _max: ProductsMaxAggregateOutputType | null
-  }
-
-  export type ProductsAvgAggregateOutputType = {
-    product_Id: number | null
-    product_price: number | null
-  }
-
-  export type ProductsSumAggregateOutputType = {
-    product_Id: number | null
-    product_price: number | null
-  }
-
-  export type ProductsMinAggregateOutputType = {
-    product_Id: number | null
-    product_name: string | null
-    product_price: number | null
-  }
-
-  export type ProductsMaxAggregateOutputType = {
-    product_Id: number | null
-    product_name: string | null
-    product_price: number | null
-  }
-
-  export type ProductsCountAggregateOutputType = {
-    product_Id: number
-    product_name: number
-    product_stat: number
-    product_price: number
-    _all: number
-  }
-
-
-  export type ProductsAvgAggregateInputType = {
-    product_Id?: true
-    product_price?: true
-  }
-
-  export type ProductsSumAggregateInputType = {
-    product_Id?: true
-    product_price?: true
-  }
-
-  export type ProductsMinAggregateInputType = {
-    product_Id?: true
-    product_name?: true
-    product_price?: true
-  }
-
-  export type ProductsMaxAggregateInputType = {
-    product_Id?: true
-    product_name?: true
-    product_price?: true
-  }
-
-  export type ProductsCountAggregateInputType = {
-    product_Id?: true
-    product_name?: true
-    product_stat?: true
-    product_price?: true
-    _all?: true
-  }
-
-  export type ProductsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Products to aggregate.
-     */
-    where?: ProductsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Products to fetch.
-     */
-    orderBy?: ProductsOrderByWithRelationInput | ProductsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ProductsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Products.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Products
-    **/
-    _count?: true | ProductsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ProductsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ProductsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ProductsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ProductsMaxAggregateInputType
-  }
-
-  export type GetProductsAggregateType<T extends ProductsAggregateArgs> = {
-        [P in keyof T & keyof AggregateProducts]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateProducts[P]>
-      : GetScalarType<T[P], AggregateProducts[P]>
-  }
-
-
-
-
-  export type ProductsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductsWhereInput
-    orderBy?: ProductsOrderByWithAggregationInput | ProductsOrderByWithAggregationInput[]
-    by: ProductsScalarFieldEnum[] | ProductsScalarFieldEnum
-    having?: ProductsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ProductsCountAggregateInputType | true
-    _avg?: ProductsAvgAggregateInputType
-    _sum?: ProductsSumAggregateInputType
-    _min?: ProductsMinAggregateInputType
-    _max?: ProductsMaxAggregateInputType
-  }
-
-  export type ProductsGroupByOutputType = {
-    product_Id: number
-    product_name: string
-    product_stat: JsonValue
-    product_price: number
-    _count: ProductsCountAggregateOutputType | null
-    _avg: ProductsAvgAggregateOutputType | null
-    _sum: ProductsSumAggregateOutputType | null
-    _min: ProductsMinAggregateOutputType | null
-    _max: ProductsMaxAggregateOutputType | null
-  }
-
-  type GetProductsGroupByPayload<T extends ProductsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ProductsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ProductsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ProductsGroupByOutputType[P]>
-            : GetScalarType<T[P], ProductsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ProductsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    product_Id?: boolean
-    product_name?: boolean
-    product_stat?: boolean
-    product_price?: boolean
-  }, ExtArgs["result"]["products"]>
-
-
-
-  export type ProductsSelectScalar = {
-    product_Id?: boolean
-    product_name?: boolean
-    product_stat?: boolean
-    product_price?: boolean
-  }
-
-  export type ProductsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"product_Id" | "product_name" | "product_stat" | "product_price", ExtArgs["result"]["products"]>
-
-  export type $ProductsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Products"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      product_Id: number
-      product_name: string
-      product_stat: Prisma.JsonValue
-      product_price: number
-    }, ExtArgs["result"]["products"]>
-    composites: {}
-  }
-
-  type ProductsGetPayload<S extends boolean | null | undefined | ProductsDefaultArgs> = $Result.GetResult<Prisma.$ProductsPayload, S>
-
-  type ProductsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProductsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProductsCountAggregateInputType | true
-    }
-
-  export interface ProductsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Products'], meta: { name: 'Products' } }
-    /**
-     * Find zero or one Products that matches the filter.
-     * @param {ProductsFindUniqueArgs} args - Arguments to find a Products
-     * @example
-     * // Get one Products
-     * const products = await prisma.products.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ProductsFindUniqueArgs>(args: SelectSubset<T, ProductsFindUniqueArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Products that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ProductsFindUniqueOrThrowArgs} args - Arguments to find a Products
-     * @example
-     * // Get one Products
-     * const products = await prisma.products.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ProductsFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Products that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductsFindFirstArgs} args - Arguments to find a Products
-     * @example
-     * // Get one Products
-     * const products = await prisma.products.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ProductsFindFirstArgs>(args?: SelectSubset<T, ProductsFindFirstArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Products that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductsFindFirstOrThrowArgs} args - Arguments to find a Products
-     * @example
-     * // Get one Products
-     * const products = await prisma.products.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ProductsFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductsFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Products that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Products
-     * const products = await prisma.products.findMany()
-     * 
-     * // Get first 10 Products
-     * const products = await prisma.products.findMany({ take: 10 })
-     * 
-     * // Only select the `product_Id`
-     * const productsWithProduct_IdOnly = await prisma.products.findMany({ select: { product_Id: true } })
-     * 
-     */
-    findMany<T extends ProductsFindManyArgs>(args?: SelectSubset<T, ProductsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Products.
-     * @param {ProductsCreateArgs} args - Arguments to create a Products.
-     * @example
-     * // Create one Products
-     * const Products = await prisma.products.create({
-     *   data: {
-     *     // ... data to create a Products
-     *   }
-     * })
-     * 
-     */
-    create<T extends ProductsCreateArgs>(args: SelectSubset<T, ProductsCreateArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Products.
-     * @param {ProductsCreateManyArgs} args - Arguments to create many Products.
-     * @example
-     * // Create many Products
-     * const products = await prisma.products.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ProductsCreateManyArgs>(args?: SelectSubset<T, ProductsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Products.
-     * @param {ProductsDeleteArgs} args - Arguments to delete one Products.
-     * @example
-     * // Delete one Products
-     * const Products = await prisma.products.delete({
-     *   where: {
-     *     // ... filter to delete one Products
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ProductsDeleteArgs>(args: SelectSubset<T, ProductsDeleteArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Products.
-     * @param {ProductsUpdateArgs} args - Arguments to update one Products.
-     * @example
-     * // Update one Products
-     * const products = await prisma.products.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ProductsUpdateArgs>(args: SelectSubset<T, ProductsUpdateArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Products.
-     * @param {ProductsDeleteManyArgs} args - Arguments to filter Products to delete.
-     * @example
-     * // Delete a few Products
-     * const { count } = await prisma.products.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ProductsDeleteManyArgs>(args?: SelectSubset<T, ProductsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Products.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Products
-     * const products = await prisma.products.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ProductsUpdateManyArgs>(args: SelectSubset<T, ProductsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Products.
-     * @param {ProductsUpsertArgs} args - Arguments to update or create a Products.
-     * @example
-     * // Update or create a Products
-     * const products = await prisma.products.upsert({
-     *   create: {
-     *     // ... data to create a Products
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Products we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ProductsUpsertArgs>(args: SelectSubset<T, ProductsUpsertArgs<ExtArgs>>): Prisma__ProductsClient<$Result.GetResult<Prisma.$ProductsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Products.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductsCountArgs} args - Arguments to filter Products to count.
-     * @example
-     * // Count the number of Products
-     * const count = await prisma.products.count({
-     *   where: {
-     *     // ... the filter for the Products we want to count
-     *   }
-     * })
-    **/
-    count<T extends ProductsCountArgs>(
-      args?: Subset<T, ProductsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ProductsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Products.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ProductsAggregateArgs>(args: Subset<T, ProductsAggregateArgs>): Prisma.PrismaPromise<GetProductsAggregateType<T>>
-
-    /**
-     * Group by Products.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ProductsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProductsGroupByArgs['orderBy'] }
-        : { orderBy?: ProductsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ProductsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Products model
-   */
-  readonly fields: ProductsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Products.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ProductsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Products model
-   */
-  interface ProductsFieldRefs {
-    readonly product_Id: FieldRef<"Products", 'Int'>
-    readonly product_name: FieldRef<"Products", 'String'>
-    readonly product_stat: FieldRef<"Products", 'Json'>
-    readonly product_price: FieldRef<"Products", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Products findUnique
-   */
-  export type ProductsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * Filter, which Products to fetch.
-     */
-    where: ProductsWhereUniqueInput
-  }
-
-  /**
-   * Products findUniqueOrThrow
-   */
-  export type ProductsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * Filter, which Products to fetch.
-     */
-    where: ProductsWhereUniqueInput
-  }
-
-  /**
-   * Products findFirst
-   */
-  export type ProductsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * Filter, which Products to fetch.
-     */
-    where?: ProductsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Products to fetch.
-     */
-    orderBy?: ProductsOrderByWithRelationInput | ProductsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Products.
-     */
-    cursor?: ProductsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Products.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Products.
-     */
-    distinct?: ProductsScalarFieldEnum | ProductsScalarFieldEnum[]
-  }
-
-  /**
-   * Products findFirstOrThrow
-   */
-  export type ProductsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * Filter, which Products to fetch.
-     */
-    where?: ProductsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Products to fetch.
-     */
-    orderBy?: ProductsOrderByWithRelationInput | ProductsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Products.
-     */
-    cursor?: ProductsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Products.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Products.
-     */
-    distinct?: ProductsScalarFieldEnum | ProductsScalarFieldEnum[]
-  }
-
-  /**
-   * Products findMany
-   */
-  export type ProductsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * Filter, which Products to fetch.
-     */
-    where?: ProductsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Products to fetch.
-     */
-    orderBy?: ProductsOrderByWithRelationInput | ProductsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Products.
-     */
-    cursor?: ProductsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Products from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Products.
-     */
-    skip?: number
-    distinct?: ProductsScalarFieldEnum | ProductsScalarFieldEnum[]
-  }
-
-  /**
-   * Products create
-   */
-  export type ProductsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * The data needed to create a Products.
-     */
-    data: XOR<ProductsCreateInput, ProductsUncheckedCreateInput>
-  }
-
-  /**
-   * Products createMany
-   */
-  export type ProductsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Products.
-     */
-    data: ProductsCreateManyInput | ProductsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Products update
-   */
-  export type ProductsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * The data needed to update a Products.
-     */
-    data: XOR<ProductsUpdateInput, ProductsUncheckedUpdateInput>
-    /**
-     * Choose, which Products to update.
-     */
-    where: ProductsWhereUniqueInput
-  }
-
-  /**
-   * Products updateMany
-   */
-  export type ProductsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Products.
-     */
-    data: XOR<ProductsUpdateManyMutationInput, ProductsUncheckedUpdateManyInput>
-    /**
-     * Filter which Products to update
-     */
-    where?: ProductsWhereInput
-    /**
-     * Limit how many Products to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Products upsert
-   */
-  export type ProductsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * The filter to search for the Products to update in case it exists.
-     */
-    where: ProductsWhereUniqueInput
-    /**
-     * In case the Products found by the `where` argument doesn't exist, create a new Products with this data.
-     */
-    create: XOR<ProductsCreateInput, ProductsUncheckedCreateInput>
-    /**
-     * In case the Products was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ProductsUpdateInput, ProductsUncheckedUpdateInput>
-  }
-
-  /**
-   * Products delete
-   */
-  export type ProductsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-    /**
-     * Filter which Products to delete.
-     */
-    where: ProductsWhereUniqueInput
-  }
-
-  /**
-   * Products deleteMany
-   */
-  export type ProductsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Products to delete
-     */
-    where?: ProductsWhereInput
-    /**
-     * Limit how many Products to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Products without action
-   */
-  export type ProductsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Products
-     */
-    select?: ProductsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Products
-     */
-    omit?: ProductsOmit<ExtArgs> | null
-  }
-
-
-  /**
    * Model Equipment
    */
 
@@ -5280,26 +4307,31 @@ export namespace Prisma {
   }
 
   export type EquipmentAvgAggregateOutputType = {
+    equip_id: number | null
     item_code: number | null
   }
 
   export type EquipmentSumAggregateOutputType = {
+    equip_id: number | null
     item_code: number | null
   }
 
   export type EquipmentMinAggregateOutputType = {
+    equip_id: number | null
     item_code: number | null
     item_name: string | null
     character_name: string | null
   }
 
   export type EquipmentMaxAggregateOutputType = {
+    equip_id: number | null
     item_code: number | null
     item_name: string | null
     character_name: string | null
   }
 
   export type EquipmentCountAggregateOutputType = {
+    equip_id: number
     item_code: number
     item_name: number
     character_name: number
@@ -5308,26 +4340,31 @@ export namespace Prisma {
 
 
   export type EquipmentAvgAggregateInputType = {
+    equip_id?: true
     item_code?: true
   }
 
   export type EquipmentSumAggregateInputType = {
+    equip_id?: true
     item_code?: true
   }
 
   export type EquipmentMinAggregateInputType = {
+    equip_id?: true
     item_code?: true
     item_name?: true
     character_name?: true
   }
 
   export type EquipmentMaxAggregateInputType = {
+    equip_id?: true
     item_code?: true
     item_name?: true
     character_name?: true
   }
 
   export type EquipmentCountAggregateInputType = {
+    equip_id?: true
     item_code?: true
     item_name?: true
     character_name?: true
@@ -5421,6 +4458,7 @@ export namespace Prisma {
   }
 
   export type EquipmentGroupByOutputType = {
+    equip_id: number
     item_code: number
     item_name: string
     character_name: string
@@ -5446,6 +4484,7 @@ export namespace Prisma {
 
 
   export type EquipmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    equip_id?: boolean
     item_code?: boolean
     item_name?: boolean
     character_name?: boolean
@@ -5456,12 +4495,13 @@ export namespace Prisma {
 
 
   export type EquipmentSelectScalar = {
+    equip_id?: boolean
     item_code?: boolean
     item_name?: boolean
     character_name?: boolean
   }
 
-  export type EquipmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"item_code" | "item_name" | "character_name", ExtArgs["result"]["equipment"]>
+  export type EquipmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"equip_id" | "item_code" | "item_name" | "character_name", ExtArgs["result"]["equipment"]>
   export type EquipmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     characters?: boolean | CharactersDefaultArgs<ExtArgs>
     items?: boolean | ItemsDefaultArgs<ExtArgs>
@@ -5474,6 +4514,7 @@ export namespace Prisma {
       items: Prisma.$ItemsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      equip_id: number
       item_code: number
       item_name: string
       character_name: string
@@ -5560,8 +4601,8 @@ export namespace Prisma {
      * // Get first 10 Equipment
      * const equipment = await prisma.equipment.findMany({ take: 10 })
      * 
-     * // Only select the `item_code`
-     * const equipmentWithItem_codeOnly = await prisma.equipment.findMany({ select: { item_code: true } })
+     * // Only select the `equip_id`
+     * const equipmentWithEquip_idOnly = await prisma.equipment.findMany({ select: { equip_id: true } })
      * 
      */
     findMany<T extends EquipmentFindManyArgs>(args?: SelectSubset<T, EquipmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -5848,6 +4889,7 @@ export namespace Prisma {
    * Fields of the Equipment model
    */
   interface EquipmentFieldRefs {
+    readonly equip_id: FieldRef<"Equipment", 'Int'>
     readonly item_code: FieldRef<"Equipment", 'Int'>
     readonly item_name: FieldRef<"Equipment", 'String'>
     readonly character_name: FieldRef<"Equipment", 'String'>
@@ -6225,16 +5267,19 @@ export namespace Prisma {
   }
 
   export type InventoryAvgAggregateOutputType = {
+    inven_id: number | null
     item_code: number | null
     item_count: number | null
   }
 
   export type InventorySumAggregateOutputType = {
+    inven_id: number | null
     item_code: number | null
     item_count: number | null
   }
 
   export type InventoryMinAggregateOutputType = {
+    inven_id: number | null
     item_code: number | null
     item_name: string | null
     item_count: number | null
@@ -6242,6 +5287,7 @@ export namespace Prisma {
   }
 
   export type InventoryMaxAggregateOutputType = {
+    inven_id: number | null
     item_code: number | null
     item_name: string | null
     item_count: number | null
@@ -6249,6 +5295,7 @@ export namespace Prisma {
   }
 
   export type InventoryCountAggregateOutputType = {
+    inven_id: number
     item_code: number
     item_name: number
     item_count: number
@@ -6258,16 +5305,19 @@ export namespace Prisma {
 
 
   export type InventoryAvgAggregateInputType = {
+    inven_id?: true
     item_code?: true
     item_count?: true
   }
 
   export type InventorySumAggregateInputType = {
+    inven_id?: true
     item_code?: true
     item_count?: true
   }
 
   export type InventoryMinAggregateInputType = {
+    inven_id?: true
     item_code?: true
     item_name?: true
     item_count?: true
@@ -6275,6 +5325,7 @@ export namespace Prisma {
   }
 
   export type InventoryMaxAggregateInputType = {
+    inven_id?: true
     item_code?: true
     item_name?: true
     item_count?: true
@@ -6282,6 +5333,7 @@ export namespace Prisma {
   }
 
   export type InventoryCountAggregateInputType = {
+    inven_id?: true
     item_code?: true
     item_name?: true
     item_count?: true
@@ -6376,6 +5428,7 @@ export namespace Prisma {
   }
 
   export type InventoryGroupByOutputType = {
+    inven_id: number
     item_code: number
     item_name: string
     item_count: number
@@ -6402,6 +5455,7 @@ export namespace Prisma {
 
 
   export type InventorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    inven_id?: boolean
     item_code?: boolean
     item_name?: boolean
     item_count?: boolean
@@ -6413,13 +5467,14 @@ export namespace Prisma {
 
 
   export type InventorySelectScalar = {
+    inven_id?: boolean
     item_code?: boolean
     item_name?: boolean
     item_count?: boolean
     character_name?: boolean
   }
 
-  export type InventoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"item_code" | "item_name" | "item_count" | "character_name", ExtArgs["result"]["inventory"]>
+  export type InventoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"inven_id" | "item_code" | "item_name" | "item_count" | "character_name", ExtArgs["result"]["inventory"]>
   export type InventoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     characters?: boolean | CharactersDefaultArgs<ExtArgs>
     items?: boolean | ItemsDefaultArgs<ExtArgs>
@@ -6432,6 +5487,7 @@ export namespace Prisma {
       items: Prisma.$ItemsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      inven_id: number
       item_code: number
       item_name: string
       item_count: number
@@ -6519,8 +5575,8 @@ export namespace Prisma {
      * // Get first 10 Inventories
      * const inventories = await prisma.inventory.findMany({ take: 10 })
      * 
-     * // Only select the `item_code`
-     * const inventoryWithItem_codeOnly = await prisma.inventory.findMany({ select: { item_code: true } })
+     * // Only select the `inven_id`
+     * const inventoryWithInven_idOnly = await prisma.inventory.findMany({ select: { inven_id: true } })
      * 
      */
     findMany<T extends InventoryFindManyArgs>(args?: SelectSubset<T, InventoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -6807,6 +5863,7 @@ export namespace Prisma {
    * Fields of the Inventory model
    */
   interface InventoryFieldRefs {
+    readonly inven_id: FieldRef<"Inventory", 'Int'>
     readonly item_code: FieldRef<"Inventory", 'Int'>
     readonly item_name: FieldRef<"Inventory", 'String'>
     readonly item_count: FieldRef<"Inventory", 'Int'>
@@ -7209,6 +6266,7 @@ export namespace Prisma {
 
 
   export const ItemsScalarFieldEnum: {
+    item_id: 'item_id',
     item_code: 'item_code',
     item_name: 'item_name',
     item_price: 'item_price',
@@ -7218,17 +6276,8 @@ export namespace Prisma {
   export type ItemsScalarFieldEnum = (typeof ItemsScalarFieldEnum)[keyof typeof ItemsScalarFieldEnum]
 
 
-  export const ProductsScalarFieldEnum: {
-    product_Id: 'product_Id',
-    product_name: 'product_name',
-    product_stat: 'product_stat',
-    product_price: 'product_price'
-  };
-
-  export type ProductsScalarFieldEnum = (typeof ProductsScalarFieldEnum)[keyof typeof ProductsScalarFieldEnum]
-
-
   export const EquipmentScalarFieldEnum: {
+    equip_id: 'equip_id',
     item_code: 'item_code',
     item_name: 'item_name',
     character_name: 'character_name'
@@ -7238,6 +6287,7 @@ export namespace Prisma {
 
 
   export const InventoryScalarFieldEnum: {
+    inven_id: 'inven_id',
     item_code: 'item_code',
     item_name: 'item_name',
     item_count: 'item_count',
@@ -7301,13 +6351,6 @@ export namespace Prisma {
   };
 
   export type ItemsOrderByRelevanceFieldEnum = (typeof ItemsOrderByRelevanceFieldEnum)[keyof typeof ItemsOrderByRelevanceFieldEnum]
-
-
-  export const ProductsOrderByRelevanceFieldEnum: {
-    product_name: 'product_name'
-  };
-
-  export type ProductsOrderByRelevanceFieldEnum = (typeof ProductsOrderByRelevanceFieldEnum)[keyof typeof ProductsOrderByRelevanceFieldEnum]
 
 
   export const EquipmentOrderByRelevanceFieldEnum: {
@@ -7495,6 +6538,7 @@ export namespace Prisma {
     AND?: ItemsWhereInput | ItemsWhereInput[]
     OR?: ItemsWhereInput[]
     NOT?: ItemsWhereInput | ItemsWhereInput[]
+    item_id?: IntFilter<"Items"> | number
     item_code?: IntFilter<"Items"> | number
     item_name?: StringFilter<"Items"> | string
     item_price?: IntFilter<"Items"> | number
@@ -7504,6 +6548,7 @@ export namespace Prisma {
   }
 
   export type ItemsOrderByWithRelationInput = {
+    item_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_price?: SortOrder
@@ -7514,6 +6559,7 @@ export namespace Prisma {
   }
 
   export type ItemsWhereUniqueInput = Prisma.AtLeast<{
+    item_id?: number
     item_code?: number
     item_name?: string
     AND?: ItemsWhereInput | ItemsWhereInput[]
@@ -7523,9 +6569,10 @@ export namespace Prisma {
     item_stat?: JsonFilter<"Items">
     equipment?: EquipmentListRelationFilter
     inventory?: InventoryListRelationFilter
-  }, "item_code" | "item_code" | "item_name">
+  }, "item_id" | "item_code" | "item_name">
 
   export type ItemsOrderByWithAggregationInput = {
+    item_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_price?: SortOrder
@@ -7541,66 +6588,18 @@ export namespace Prisma {
     AND?: ItemsScalarWhereWithAggregatesInput | ItemsScalarWhereWithAggregatesInput[]
     OR?: ItemsScalarWhereWithAggregatesInput[]
     NOT?: ItemsScalarWhereWithAggregatesInput | ItemsScalarWhereWithAggregatesInput[]
+    item_id?: IntWithAggregatesFilter<"Items"> | number
     item_code?: IntWithAggregatesFilter<"Items"> | number
     item_name?: StringWithAggregatesFilter<"Items"> | string
     item_price?: IntWithAggregatesFilter<"Items"> | number
     item_stat?: JsonWithAggregatesFilter<"Items">
   }
 
-  export type ProductsWhereInput = {
-    AND?: ProductsWhereInput | ProductsWhereInput[]
-    OR?: ProductsWhereInput[]
-    NOT?: ProductsWhereInput | ProductsWhereInput[]
-    product_Id?: IntFilter<"Products"> | number
-    product_name?: StringFilter<"Products"> | string
-    product_stat?: JsonFilter<"Products">
-    product_price?: IntFilter<"Products"> | number
-  }
-
-  export type ProductsOrderByWithRelationInput = {
-    product_Id?: SortOrder
-    product_name?: SortOrder
-    product_stat?: SortOrder
-    product_price?: SortOrder
-    _relevance?: ProductsOrderByRelevanceInput
-  }
-
-  export type ProductsWhereUniqueInput = Prisma.AtLeast<{
-    product_Id?: number
-    product_name?: string
-    AND?: ProductsWhereInput | ProductsWhereInput[]
-    OR?: ProductsWhereInput[]
-    NOT?: ProductsWhereInput | ProductsWhereInput[]
-    product_stat?: JsonFilter<"Products">
-    product_price?: IntFilter<"Products"> | number
-  }, "product_Id" | "product_Id" | "product_name">
-
-  export type ProductsOrderByWithAggregationInput = {
-    product_Id?: SortOrder
-    product_name?: SortOrder
-    product_stat?: SortOrder
-    product_price?: SortOrder
-    _count?: ProductsCountOrderByAggregateInput
-    _avg?: ProductsAvgOrderByAggregateInput
-    _max?: ProductsMaxOrderByAggregateInput
-    _min?: ProductsMinOrderByAggregateInput
-    _sum?: ProductsSumOrderByAggregateInput
-  }
-
-  export type ProductsScalarWhereWithAggregatesInput = {
-    AND?: ProductsScalarWhereWithAggregatesInput | ProductsScalarWhereWithAggregatesInput[]
-    OR?: ProductsScalarWhereWithAggregatesInput[]
-    NOT?: ProductsScalarWhereWithAggregatesInput | ProductsScalarWhereWithAggregatesInput[]
-    product_Id?: IntWithAggregatesFilter<"Products"> | number
-    product_name?: StringWithAggregatesFilter<"Products"> | string
-    product_stat?: JsonWithAggregatesFilter<"Products">
-    product_price?: IntWithAggregatesFilter<"Products"> | number
-  }
-
   export type EquipmentWhereInput = {
     AND?: EquipmentWhereInput | EquipmentWhereInput[]
     OR?: EquipmentWhereInput[]
     NOT?: EquipmentWhereInput | EquipmentWhereInput[]
+    equip_id?: IntFilter<"Equipment"> | number
     item_code?: IntFilter<"Equipment"> | number
     item_name?: StringFilter<"Equipment"> | string
     character_name?: StringFilter<"Equipment"> | string
@@ -7609,6 +6608,7 @@ export namespace Prisma {
   }
 
   export type EquipmentOrderByWithRelationInput = {
+    equip_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     character_name?: SortOrder
@@ -7618,6 +6618,7 @@ export namespace Prisma {
   }
 
   export type EquipmentWhereUniqueInput = Prisma.AtLeast<{
+    equip_id?: number
     item_code?: number
     item_name?: string
     character_name?: string
@@ -7626,9 +6627,10 @@ export namespace Prisma {
     NOT?: EquipmentWhereInput | EquipmentWhereInput[]
     characters?: XOR<CharactersScalarRelationFilter, CharactersWhereInput>
     items?: XOR<ItemsScalarRelationFilter, ItemsWhereInput>
-  }, "item_code" | "item_code" | "item_name" | "character_name">
+  }, "equip_id" | "item_code" | "item_name" | "character_name">
 
   export type EquipmentOrderByWithAggregationInput = {
+    equip_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     character_name?: SortOrder
@@ -7643,6 +6645,7 @@ export namespace Prisma {
     AND?: EquipmentScalarWhereWithAggregatesInput | EquipmentScalarWhereWithAggregatesInput[]
     OR?: EquipmentScalarWhereWithAggregatesInput[]
     NOT?: EquipmentScalarWhereWithAggregatesInput | EquipmentScalarWhereWithAggregatesInput[]
+    equip_id?: IntWithAggregatesFilter<"Equipment"> | number
     item_code?: IntWithAggregatesFilter<"Equipment"> | number
     item_name?: StringWithAggregatesFilter<"Equipment"> | string
     character_name?: StringWithAggregatesFilter<"Equipment"> | string
@@ -7652,6 +6655,7 @@ export namespace Prisma {
     AND?: InventoryWhereInput | InventoryWhereInput[]
     OR?: InventoryWhereInput[]
     NOT?: InventoryWhereInput | InventoryWhereInput[]
+    inven_id?: IntFilter<"Inventory"> | number
     item_code?: IntFilter<"Inventory"> | number
     item_name?: StringFilter<"Inventory"> | string
     item_count?: IntFilter<"Inventory"> | number
@@ -7661,6 +6665,7 @@ export namespace Prisma {
   }
 
   export type InventoryOrderByWithRelationInput = {
+    inven_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_count?: SortOrder
@@ -7671,6 +6676,7 @@ export namespace Prisma {
   }
 
   export type InventoryWhereUniqueInput = Prisma.AtLeast<{
+    inven_id?: number
     item_code?: number
     item_name?: string
     character_name?: string
@@ -7680,9 +6686,10 @@ export namespace Prisma {
     item_count?: IntFilter<"Inventory"> | number
     characters?: XOR<CharactersScalarRelationFilter, CharactersWhereInput>
     items?: XOR<ItemsScalarRelationFilter, ItemsWhereInput>
-  }, "item_code" | "item_code" | "item_name" | "character_name">
+  }, "inven_id" | "item_code" | "item_name" | "character_name">
 
   export type InventoryOrderByWithAggregationInput = {
+    inven_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_count?: SortOrder
@@ -7698,6 +6705,7 @@ export namespace Prisma {
     AND?: InventoryScalarWhereWithAggregatesInput | InventoryScalarWhereWithAggregatesInput[]
     OR?: InventoryScalarWhereWithAggregatesInput[]
     NOT?: InventoryScalarWhereWithAggregatesInput | InventoryScalarWhereWithAggregatesInput[]
+    inven_id?: IntWithAggregatesFilter<"Inventory"> | number
     item_code?: IntWithAggregatesFilter<"Inventory"> | number
     item_name?: StringWithAggregatesFilter<"Inventory"> | string
     item_count?: IntWithAggregatesFilter<"Inventory"> | number
@@ -7822,6 +6830,7 @@ export namespace Prisma {
   }
 
   export type ItemsCreateInput = {
+    item_code: number
     item_name: string
     item_price: number
     item_stat: JsonNullValueInput | InputJsonValue
@@ -7830,7 +6839,8 @@ export namespace Prisma {
   }
 
   export type ItemsUncheckedCreateInput = {
-    item_code?: number
+    item_id?: number
+    item_code: number
     item_name: string
     item_price: number
     item_stat: JsonNullValueInput | InputJsonValue
@@ -7839,6 +6849,7 @@ export namespace Prisma {
   }
 
   export type ItemsUpdateInput = {
+    item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
     item_stat?: JsonNullValueInput | InputJsonValue
@@ -7847,6 +6858,7 @@ export namespace Prisma {
   }
 
   export type ItemsUncheckedUpdateInput = {
+    item_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
@@ -7856,112 +6868,77 @@ export namespace Prisma {
   }
 
   export type ItemsCreateManyInput = {
-    item_code?: number
+    item_id?: number
+    item_code: number
     item_name: string
     item_price: number
     item_stat: JsonNullValueInput | InputJsonValue
   }
 
   export type ItemsUpdateManyMutationInput = {
+    item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
     item_stat?: JsonNullValueInput | InputJsonValue
   }
 
   export type ItemsUncheckedUpdateManyInput = {
+    item_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
     item_stat?: JsonNullValueInput | InputJsonValue
   }
 
-  export type ProductsCreateInput = {
-    product_name: string
-    product_stat: JsonNullValueInput | InputJsonValue
-    product_price: number
-  }
-
-  export type ProductsUncheckedCreateInput = {
-    product_Id?: number
-    product_name: string
-    product_stat: JsonNullValueInput | InputJsonValue
-    product_price: number
-  }
-
-  export type ProductsUpdateInput = {
-    product_name?: StringFieldUpdateOperationsInput | string
-    product_stat?: JsonNullValueInput | InputJsonValue
-    product_price?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ProductsUncheckedUpdateInput = {
-    product_Id?: IntFieldUpdateOperationsInput | number
-    product_name?: StringFieldUpdateOperationsInput | string
-    product_stat?: JsonNullValueInput | InputJsonValue
-    product_price?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ProductsCreateManyInput = {
-    product_Id?: number
-    product_name: string
-    product_stat: JsonNullValueInput | InputJsonValue
-    product_price: number
-  }
-
-  export type ProductsUpdateManyMutationInput = {
-    product_name?: StringFieldUpdateOperationsInput | string
-    product_stat?: JsonNullValueInput | InputJsonValue
-    product_price?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ProductsUncheckedUpdateManyInput = {
-    product_Id?: IntFieldUpdateOperationsInput | number
-    product_name?: StringFieldUpdateOperationsInput | string
-    product_stat?: JsonNullValueInput | InputJsonValue
-    product_price?: IntFieldUpdateOperationsInput | number
-  }
-
   export type EquipmentCreateInput = {
+    equip_id: number
     item_name: string
     characters: CharactersCreateNestedOneWithoutEquipmentInput
     items?: ItemsCreateNestedOneWithoutEquipmentInput
   }
 
   export type EquipmentUncheckedCreateInput = {
+    equip_id: number
     item_code?: number
     item_name: string
     character_name: string
   }
 
   export type EquipmentUpdateInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     characters?: CharactersUpdateOneRequiredWithoutEquipmentNestedInput
     items?: ItemsUpdateOneRequiredWithoutEquipmentNestedInput
   }
 
   export type EquipmentUncheckedUpdateInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     character_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type EquipmentCreateManyInput = {
+    equip_id: number
     item_code?: number
     item_name: string
     character_name: string
   }
 
   export type EquipmentUpdateManyMutationInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type EquipmentUncheckedUpdateManyInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     character_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InventoryCreateInput = {
+    inven_id: number
     item_name: string
     item_count: number
     characters: CharactersCreateNestedOneWithoutInventoryInput
@@ -7969,6 +6946,7 @@ export namespace Prisma {
   }
 
   export type InventoryUncheckedCreateInput = {
+    inven_id: number
     item_code?: number
     item_name: string
     item_count: number
@@ -7976,6 +6954,7 @@ export namespace Prisma {
   }
 
   export type InventoryUpdateInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
     characters?: CharactersUpdateOneRequiredWithoutInventoryNestedInput
@@ -7983,6 +6962,7 @@ export namespace Prisma {
   }
 
   export type InventoryUncheckedUpdateInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
@@ -7990,6 +6970,7 @@ export namespace Prisma {
   }
 
   export type InventoryCreateManyInput = {
+    inven_id: number
     item_code?: number
     item_name: string
     item_count: number
@@ -7997,11 +6978,13 @@ export namespace Prisma {
   }
 
   export type InventoryUpdateManyMutationInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
   }
 
   export type InventoryUncheckedUpdateManyInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
@@ -8225,6 +7208,7 @@ export namespace Prisma {
   }
 
   export type ItemsCountOrderByAggregateInput = {
+    item_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_price?: SortOrder
@@ -8232,23 +7216,27 @@ export namespace Prisma {
   }
 
   export type ItemsAvgOrderByAggregateInput = {
+    item_id?: SortOrder
     item_code?: SortOrder
     item_price?: SortOrder
   }
 
   export type ItemsMaxOrderByAggregateInput = {
+    item_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_price?: SortOrder
   }
 
   export type ItemsMinOrderByAggregateInput = {
+    item_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_price?: SortOrder
   }
 
   export type ItemsSumOrderByAggregateInput = {
+    item_id?: SortOrder
     item_code?: SortOrder
     item_price?: SortOrder
   }
@@ -8279,41 +7267,6 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
-  export type ProductsOrderByRelevanceInput = {
-    fields: ProductsOrderByRelevanceFieldEnum | ProductsOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type ProductsCountOrderByAggregateInput = {
-    product_Id?: SortOrder
-    product_name?: SortOrder
-    product_stat?: SortOrder
-    product_price?: SortOrder
-  }
-
-  export type ProductsAvgOrderByAggregateInput = {
-    product_Id?: SortOrder
-    product_price?: SortOrder
-  }
-
-  export type ProductsMaxOrderByAggregateInput = {
-    product_Id?: SortOrder
-    product_name?: SortOrder
-    product_price?: SortOrder
-  }
-
-  export type ProductsMinOrderByAggregateInput = {
-    product_Id?: SortOrder
-    product_name?: SortOrder
-    product_price?: SortOrder
-  }
-
-  export type ProductsSumOrderByAggregateInput = {
-    product_Id?: SortOrder
-    product_price?: SortOrder
-  }
-
   export type CharactersScalarRelationFilter = {
     is?: CharactersWhereInput
     isNot?: CharactersWhereInput
@@ -8331,28 +7284,33 @@ export namespace Prisma {
   }
 
   export type EquipmentCountOrderByAggregateInput = {
+    equip_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     character_name?: SortOrder
   }
 
   export type EquipmentAvgOrderByAggregateInput = {
+    equip_id?: SortOrder
     item_code?: SortOrder
   }
 
   export type EquipmentMaxOrderByAggregateInput = {
+    equip_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     character_name?: SortOrder
   }
 
   export type EquipmentMinOrderByAggregateInput = {
+    equip_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     character_name?: SortOrder
   }
 
   export type EquipmentSumOrderByAggregateInput = {
+    equip_id?: SortOrder
     item_code?: SortOrder
   }
 
@@ -8363,6 +7321,7 @@ export namespace Prisma {
   }
 
   export type InventoryCountOrderByAggregateInput = {
+    inven_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_count?: SortOrder
@@ -8370,11 +7329,13 @@ export namespace Prisma {
   }
 
   export type InventoryAvgOrderByAggregateInput = {
+    inven_id?: SortOrder
     item_code?: SortOrder
     item_count?: SortOrder
   }
 
   export type InventoryMaxOrderByAggregateInput = {
+    inven_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_count?: SortOrder
@@ -8382,6 +7343,7 @@ export namespace Prisma {
   }
 
   export type InventoryMinOrderByAggregateInput = {
+    inven_id?: SortOrder
     item_code?: SortOrder
     item_name?: SortOrder
     item_count?: SortOrder
@@ -8389,6 +7351,7 @@ export namespace Prisma {
   }
 
   export type InventorySumOrderByAggregateInput = {
+    inven_id?: SortOrder
     item_code?: SortOrder
     item_count?: SortOrder
   }
@@ -8835,11 +7798,13 @@ export namespace Prisma {
   }
 
   export type EquipmentCreateWithoutCharactersInput = {
+    equip_id: number
     item_name: string
     items?: ItemsCreateNestedOneWithoutEquipmentInput
   }
 
   export type EquipmentUncheckedCreateWithoutCharactersInput = {
+    equip_id: number
     item_code?: number
     item_name: string
   }
@@ -8850,12 +7815,14 @@ export namespace Prisma {
   }
 
   export type InventoryCreateWithoutCharactersInput = {
+    inven_id: number
     item_name: string
     item_count: number
     items?: ItemsCreateNestedOneWithoutInventoryInput
   }
 
   export type InventoryUncheckedCreateWithoutCharactersInput = {
+    inven_id: number
     item_code?: number
     item_name: string
     item_count: number
@@ -8902,11 +7869,13 @@ export namespace Prisma {
   }
 
   export type EquipmentUpdateWithoutCharactersInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     items?: ItemsUpdateOneRequiredWithoutEquipmentNestedInput
   }
 
   export type EquipmentUncheckedUpdateWithoutCharactersInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
   }
@@ -8923,23 +7892,27 @@ export namespace Prisma {
   }
 
   export type InventoryUpdateWithoutCharactersInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
     items?: ItemsUpdateOneRequiredWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateWithoutCharactersInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
   }
 
   export type EquipmentCreateWithoutItemsInput = {
+    equip_id: number
     item_name: string
     characters: CharactersCreateNestedOneWithoutEquipmentInput
   }
 
   export type EquipmentUncheckedCreateWithoutItemsInput = {
+    equip_id: number
     item_name: string
     character_name: string
   }
@@ -8955,12 +7928,14 @@ export namespace Prisma {
   }
 
   export type InventoryCreateWithoutItemsInput = {
+    inven_id: number
     item_name: string
     item_count: number
     characters: CharactersCreateNestedOneWithoutInventoryInput
   }
 
   export type InventoryUncheckedCreateWithoutItemsInput = {
+    inven_id: number
     item_name: string
     item_count: number
     character_name: string
@@ -8996,6 +7971,7 @@ export namespace Prisma {
     AND?: EquipmentScalarWhereInput | EquipmentScalarWhereInput[]
     OR?: EquipmentScalarWhereInput[]
     NOT?: EquipmentScalarWhereInput | EquipmentScalarWhereInput[]
+    equip_id?: IntFilter<"Equipment"> | number
     item_code?: IntFilter<"Equipment"> | number
     item_name?: StringFilter<"Equipment"> | string
     character_name?: StringFilter<"Equipment"> | string
@@ -9021,6 +7997,7 @@ export namespace Prisma {
     AND?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
     OR?: InventoryScalarWhereInput[]
     NOT?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
+    inven_id?: IntFilter<"Inventory"> | number
     item_code?: IntFilter<"Inventory"> | number
     item_name?: StringFilter<"Inventory"> | string
     item_count?: IntFilter<"Inventory"> | number
@@ -9052,6 +8029,7 @@ export namespace Prisma {
   }
 
   export type ItemsCreateWithoutEquipmentInput = {
+    item_code: number
     item_name: string
     item_price: number
     item_stat: JsonNullValueInput | InputJsonValue
@@ -9059,7 +8037,8 @@ export namespace Prisma {
   }
 
   export type ItemsUncheckedCreateWithoutEquipmentInput = {
-    item_code?: number
+    item_id?: number
+    item_code: number
     item_name: string
     item_price: number
     item_stat: JsonNullValueInput | InputJsonValue
@@ -9113,6 +8092,7 @@ export namespace Prisma {
   }
 
   export type ItemsUpdateWithoutEquipmentInput = {
+    item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
     item_stat?: JsonNullValueInput | InputJsonValue
@@ -9120,6 +8100,7 @@ export namespace Prisma {
   }
 
   export type ItemsUncheckedUpdateWithoutEquipmentInput = {
+    item_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
@@ -9152,6 +8133,7 @@ export namespace Prisma {
   }
 
   export type ItemsCreateWithoutInventoryInput = {
+    item_code: number
     item_name: string
     item_price: number
     item_stat: JsonNullValueInput | InputJsonValue
@@ -9159,7 +8141,8 @@ export namespace Prisma {
   }
 
   export type ItemsUncheckedCreateWithoutInventoryInput = {
-    item_code?: number
+    item_id?: number
+    item_code: number
     item_name: string
     item_price: number
     item_stat: JsonNullValueInput | InputJsonValue
@@ -9213,6 +8196,7 @@ export namespace Prisma {
   }
 
   export type ItemsUpdateWithoutInventoryInput = {
+    item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
     item_stat?: JsonNullValueInput | InputJsonValue
@@ -9220,6 +8204,7 @@ export namespace Prisma {
   }
 
   export type ItemsUncheckedUpdateWithoutInventoryInput = {
+    item_id?: IntFieldUpdateOperationsInput | number
     item_code?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_price?: IntFieldUpdateOperationsInput | number
@@ -9263,44 +8248,52 @@ export namespace Prisma {
   }
 
   export type EquipmentCreateManyItemsInput = {
+    equip_id: number
     item_name: string
     character_name: string
   }
 
   export type InventoryCreateManyItemsInput = {
+    inven_id: number
     item_name: string
     item_count: number
     character_name: string
   }
 
   export type EquipmentUpdateWithoutItemsInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     characters?: CharactersUpdateOneRequiredWithoutEquipmentNestedInput
   }
 
   export type EquipmentUncheckedUpdateWithoutItemsInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     character_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type EquipmentUncheckedUpdateManyWithoutItemsInput = {
+    equip_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     character_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InventoryUpdateWithoutItemsInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
     characters?: CharactersUpdateOneRequiredWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateWithoutItemsInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
     character_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InventoryUncheckedUpdateManyWithoutItemsInput = {
+    inven_id?: IntFieldUpdateOperationsInput | number
     item_name?: StringFieldUpdateOperationsInput | string
     item_count?: IntFieldUpdateOperationsInput | number
     character_name?: StringFieldUpdateOperationsInput | string

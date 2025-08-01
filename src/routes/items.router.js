@@ -8,8 +8,7 @@ const router = express.Router();
 
 // 아이템 생성
 router.post('/items/create', async (req, res) => {
-    // const { item_Id } = req.params;
-    const {item_name, item_stat, item_price } = req.body;
+    const { item_code, item_name, item_stat, item_price } = req.body;
 
     const isExistItem = await prisma.items.findUnique({
         where:{ item_name }
@@ -20,6 +19,7 @@ router.post('/items/create', async (req, res) => {
 
     const item = await prisma.items.create({
         data: {
+            item_code,
             item_name,
             item_stat,
             item_price
@@ -31,12 +31,12 @@ router.post('/items/create', async (req, res) => {
 
 /////////////////////////////////////////////////////////////////////////
 // 아이템 수정
-router.put('/items/:item_Id', async (req, res, next) => {
-    const { item_Id } = req.params;
+router.put('/items/:item_code', async (req, res, next) => {
+    const { item_code } = req.params;
     const {item_name, item_stat} = req.body;
 
     const item = await prisma.items.findUnique({
-        where: { item_Id }
+        where: { item_code }
     });
     if(!item) { return res.status(404).json({message:'NO Data'});}
 
@@ -56,9 +56,9 @@ router.put('/items/:item_Id', async (req, res, next) => {
 router.get('/items', async (req, res, next) => {
     const items = await prisma.items.findMany({
         select: {
-            item_Id,
-            item_name,
-            item_price
+            item_code :true,
+            item_name :true,
+            item_price:true
         }
     });
 
@@ -67,12 +67,12 @@ router.get('/items', async (req, res, next) => {
 
 /////////////////////////////////////////////////////////////////////////
 // 아이템 세부 조회
-router.get('/items/:item_Id', async (req, res, next) => {
-    const { item_Id } = req.params;
+router.get('/items/:item_code', async (req, res, next) => {
+    const { item_code } = req.params;
     const item = await prisma.items.findUnique({
         where: { item_Id },
         select: {
-            item_Id,
+            item_code,
             item_name,
             item_stat,
             item_price
