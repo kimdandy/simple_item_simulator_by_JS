@@ -211,6 +211,16 @@ router.post('/character/:character_name/equip', authMiddleware, async (req, res)
       }
     });
 
+    // 장비 장착에 따른 능력치 증가
+    const stat = item.item_stat;
+    await prisma.characters.update({
+        where: { characterId: character.characterId },
+        data: {
+            power: character.power + (stat.power || 0),
+            health: character.health + (stat.health || 0),
+        },
+    });
+
     return res.status(201).json({ message: 'Item equipped', data: equip });
 
   } catch (error) {
@@ -281,6 +291,20 @@ router.delete('/character/:character_name/equip/:item_code', authMiddleware, asy
     });
     if (!equip) return res.status(404).json({ message: 'Equipment not found' });
 
+    // 장비해제에 따른 능력치 감소
+    const item = await prisma.items.findUnique({
+        where: { item_code: Number(item_code) },
+    });
+    const stat = item.item_stat;
+    await prisma.characters.update({
+        where: { characterId: character.characterId },
+        data: {
+            power: character.power - (stat.power || 0),
+            health: character.health - (stat.health || 0),
+        },
+    });
+    
+
     await prisma.equipments.delete({
       where: {
         equip_id: equip.equip_id
@@ -288,6 +312,8 @@ router.delete('/character/:character_name/equip/:item_code', authMiddleware, asy
     });
 
     return res.status(200).json({ message: 'Equipment removed' });
+     
+
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal Server Error' });
