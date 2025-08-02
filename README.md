@@ -55,7 +55,6 @@ cd <project-folder>
 npm install
 
 # .env 파일 생성 (예시)
-ACCESS_TOKEN_SECRET=your_jwt_secret_key
 
 # DB 설정 및 Prisma 마이그레이션
 npx prisma migrate dev --name init
