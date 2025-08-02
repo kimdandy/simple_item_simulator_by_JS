@@ -146,17 +146,15 @@ exports.Prisma.ItemsScalarFieldEnum = {
 
 exports.Prisma.InventoryScalarFieldEnum = {
   inven_id: 'inven_id',
-  character_name: 'character_name',
-  item_code: 'item_code',
-  item_name: 'item_name',
+  characterId: 'characterId',
+  itemId: 'itemId',
   item_count: 'item_count'
 };
 
-exports.Prisma.EquipmentScalarFieldEnum = {
+exports.Prisma.EquipmentsScalarFieldEnum = {
   equip_id: 'equip_id',
-  character_name: 'character_name',
-  item_code: 'item_code',
-  item_name: 'item_name'
+  characterId: 'characterId',
+  itemId: 'itemId'
 };
 
 exports.Prisma.SortOrder = {
@@ -194,23 +192,13 @@ exports.Prisma.ItemsOrderByRelevanceFieldEnum = {
   item_name: 'item_name'
 };
 
-exports.Prisma.InventoryOrderByRelevanceFieldEnum = {
-  character_name: 'character_name',
-  item_name: 'item_name'
-};
-
-exports.Prisma.EquipmentOrderByRelevanceFieldEnum = {
-  character_name: 'character_name',
-  item_name: 'item_name'
-};
-
 
 exports.Prisma.ModelName = {
   Accounts: 'Accounts',
   Characters: 'Characters',
   Items: 'Items',
   Inventory: 'Inventory',
-  Equipment: 'Equipment'
+  Equipments: 'Equipments'
 };
 
 /**

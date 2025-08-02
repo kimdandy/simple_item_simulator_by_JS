@@ -27,8 +27,8 @@ model Characters {
   userId         String @map("userId")
 
   accounts  Accounts   @relation(fields: [userId], references: [userId], onDelete: Cascade)
-  inventory Inventory?
-  equipment Equipment?
+  inventory Inventory[]
+  equipment Equipments[]
 
   @@index([userId], map: "Characters_userId_fkey")
   @@map("Characters")
@@ -41,42 +41,32 @@ model Items {
   item_price Int
   item_stat  Json   @map("item_stat")
 
-  //inventory Inventory[]
-  inventory_code Inventory[] @relation("inven_code")
-  inventory_name Inventory[] @relation("inven_name")
+  inventory Inventory[]
+  //inventory_code Inventory[] @relation("inven_code")
+  //inventory_name Inventory[] @relation("inven_name")
 
-  //equipment Equipment[]
-  equipment_code Equipment[] @relation("equip_code")
-  equipment_name Equipment[] @relation("equip_name")
+  equipment Equipments[]
+  //equipment_code Equipment[] @relation("equip_code")
+  //equipment_name Equipment[] @relation("equip_name")
 
   @@map("Items")
 }
 
 model Inventory {
-  inven_id       Int    @id @default(autoincrement()) 
-  character_name String @unique
-  item_code      Int    @unique
-  item_name String @unique
-  item_count     Int
-
-  characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
-  //items      Items      @relation( fields: [item_code], references: [item_code], onDelete: Cascade)
-  inven_code      Items      @relation("inven_code", fields: [item_code], references: [item_code], onDelete: Cascade)
-  inven_name  Items @relation("inven_name", fields: [item_name], references: [item_name], onDelete: Cascade)
-  
-  @@map("Inventory")
+  inven_id          Int        @id @default(autoincrement())
+  character   Characters @relation(fields: [characterId], references: [characterId])
+  characterId Int
+  item        Items      @relation(fields: [itemId], references: [item_code])
+  itemId      Int
+  item_count  Int
 }
 
-model Equipment {
-  equip_id       Int    @id @default(autoincrement()) 
-  character_name String @unique
-  item_code      Int    @unique
-  item_name      String @unique
+model Equipments {
+  equip_id           Int        @id @default(autoincrement())
+  character    Characters @relation(fields: [characterId], references: [characterId])
+  characterId  Int
+  item         Items      @relation(fields: [itemId], references: [item_code])
+  itemId       Int
 
-  characters Characters @relation(fields: [character_name], references: [character_name], onDelete: Cascade)
-  //items      Items      @relation(fields: [item_code], references: [item_code], onDelete: Cascade)
-  equip_code    Items      @relation("equip_code", fields: [item_code], references: [item_code], onDelete: Cascade)
-  equip_name  Items @relation("equip_name", fields: [item_name], references: [item_name], onDelete: Cascade)
-
-  @@map("Equipment")
+  @@unique([characterId, itemId]) // 동일 아이템 중복 장착 방지
 }

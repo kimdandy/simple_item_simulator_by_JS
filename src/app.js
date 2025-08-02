@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import AccountRouter from './routes/account.router.js';
 import CharacterRouter from './routes/character.router.js';
 import ItemRouter from './routes/items.router.js';
-//import ProductRouter from './routes/product.router.js';
+import EarnRouter from './routes/get_money.router.js';
 
 const app = express();
 const PORT = 3000; // 서버 포트 설정
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 //app.use(LogMiddleware); // 로그 미들웨어 사용
 
-app.use('/api', [AccountRouter, CharacterRouter, ItemRouter]); // router 
+app.use('/api', [AccountRouter, CharacterRouter, ItemRouter, EarnRouter]); // router 
 
 app.listen(PORT, () => { // 연결 확인 메시지
   console.log(PORT, 'Port connected!');
