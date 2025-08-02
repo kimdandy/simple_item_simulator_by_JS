@@ -7,16 +7,28 @@ import { prisma } from '../utils/prisma/index.js';
 
 const router = express.Router();
 
-// 계정 생성 api
+// 계정 생성 
  router.post('/account/sign_up', async(req, res, next) => {
     const { userId, password, confirm_password, name} = req.body;
+
+    
+    // 아이디 제한 : 영어 소문자와 숫자만
+    const userIdRegex = /^[a-z0-9]+$/;
+    if (!userIdRegex.test(userId)) {
+        return res.status(400).json({ message: "The ID can only contain lowercase English letters and numbers." });
+    }
+
+    // 비밀번호 길이 제한
+    if (password.length < 6) {
+        return res.status(400).json({ message: "Password must be at least 6 characters long." });
+    }
 
     const isExistUser = await prisma.accounts.findFirst({
         where: {
             userId,
         }
-    }); // 유효성 검증
-    if (isExistUser){ 
+    }); 
+    if (isExistUser){  // 중복 검증
         return res.status(409).json({message : 'Already Exist!'})
     }
     else if (confirm_password !== password) {
